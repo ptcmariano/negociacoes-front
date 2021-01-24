@@ -2,14 +2,10 @@
 class NegociacoesView {
 
     constructor(elemento) {
-        this._elemento = elemento;
+        super(elemento);
     }
 
-    update(listaModel) {
-        this._elemento.innerHTML = this._template(listaModel);
-    }
-
-    _template(listaModel) {
+    template(listaModel) {
         return `
             <table class="table table-hover table-bordered">
                 <thead>
