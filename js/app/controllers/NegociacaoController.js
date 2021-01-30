@@ -4,10 +4,9 @@ class NegociacaoController {
         this._inputData = document.querySelector('#data');
         this._inputQuantidade = document.querySelector('#quantidade');
         this._inputValor = document.querySelector('#valor');
-        this._listaNegociacoes = new ListaNegociacoes();
 
         this._negociacoesView = new NegociacoesView(document.querySelector('#negociacoesTable'));
-        this._negociacoesView.update(this._listaNegociacoes);
+        this._listaNegociacoes = new ListaNegociacoes(model => this._negociacoesView.update(model));
 
         this._mensagem = new Mensagem();
         this._mensagemView = new MensagemView(document.querySelector('#mensagemView'));

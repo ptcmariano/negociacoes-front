@@ -1,5 +1,5 @@
 
-class NegociacoesView {
+class NegociacoesView extends View {
 
     constructor(elemento) {
         super(elemento);
