@@ -8,12 +8,18 @@ class ProxyFactory{
                     typeof(target[prop]) === typeof(Function)
                 ) {
                     return function() {
-                        console.log(`interceptando ${prop}`)
                         Reflect.apply(target[prop], target, arguments);
                         return acao(target);
                     }
                 }
                 return Reflect.get(target, prop, reciever);
+            },
+            set(target, prop, value, reciever) {
+                if (props.includes(prop)) {
+                    console.log(`vai setar`, prop);
+                    acao(target);
+                }
+                return Reflect.set(target, prop, value, reciever);
             }
         });
     }

@@ -14,8 +14,12 @@ class NegociacaoController {
             (model) => this._negociacoesView.update(model)
         );
 
-        this._mensagem = new Mensagem();
         this._mensagemView = new MensagemView(document.querySelector('#mensagemView'));
+        this._mensagem = ProxyFactory.create(
+            new Mensagem(),
+            ['texto'],
+            (model) => this._mensagemView.update(model)
+        );
     }
     adiciona(event) {
         event.preventDefault()
@@ -28,6 +32,5 @@ class NegociacaoController {
         this._listaNegociacoes.adiciona(negociacao);
 
         this._mensagem.texto = "Negociação criada com sucesso";
-        this._mensagemView.update(this._mensagem);
     }
 }
