@@ -8,21 +8,11 @@ class NegociacaoController {
 
         this._negociacoesView = new NegociacoesView(document.querySelector('#negociacoesTable'));
 
-        this._listaNegociacoes = new Proxy(new ListaNegociacoes(), {
-            get(target, prop, reciever) {
-                if (
-                    ['adiciona','esvazia'].includes(prop) &&
-                    typeof(target[prop]) === typeof(Function)
-                ) {
-                    return function() {
-                        console.log(`interceptando ${prop}`)
-                        Reflect.apply(target[prop], target, arguments);
-                        self._negociacoesView.update(target);
-                    }
-                }
-                return Reflect.get(target, prop, reciever);
-            }
-        });
+        this._listaNegociacoes = ProxyFactory.create(
+            new ListaNegociacoes(),
+            ['adiciona', 'esvazia'],
+            (model) => this._negociacoesView.update(model)
+        );
 
         this._mensagem = new Mensagem();
         this._mensagemView = new MensagemView(document.querySelector('#mensagemView'));
