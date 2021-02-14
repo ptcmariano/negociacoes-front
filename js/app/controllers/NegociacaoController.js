@@ -8,17 +8,18 @@ class NegociacaoController {
 
         this._negociacoesView = new NegociacoesView(document.querySelector('#negociacoesTable'));
 
-        this._listaNegociacoes = ProxyFactory.create(
+        this._listaNegociacoes = new Associa(
             new ListaNegociacoes(),
-            ['adiciona', 'esvazia'],
-            (model) => this._negociacoesView.update(model)
+            this._negociacoesView,
+            ['adiciona', 'esvazia']
         );
 
         this._mensagemView = new MensagemView(document.querySelector('#mensagemView'));
-        this._mensagem = ProxyFactory.create(
+
+        this._mensagem = new Associa(
             new Mensagem(),
-            ['texto'],
-            (model) => this._mensagemView.update(model)
+            this._mensagemView,
+            ['texto']
         );
     }
     adiciona(event) {
