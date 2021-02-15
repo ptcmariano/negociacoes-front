@@ -1,6 +1,6 @@
 
 class Associa {
-    constructor(model, view, props) {
+    constructor(model, view, ...props) {
         const proxy = ProxyFactory.create(
             model,
             props,
